@@ -105,3 +105,23 @@ async def retrieve_categories():
 async def create_author(author: Author):
     posts.append(author)
     return {'message': author}
+
+
+@app.get('/authors/')
+async def retrieve_authors():
+    return {'authors': posts}
+
+@app.put('/author-update/')
+async def update_author(author_id: int, author: Author):
+    posts[author_id] = author
+    return {'message': author}
+
+@app.patch('/author-update/{author_id}')
+async def update_author(author_id: int, author: Author):
+    posts[author_id] = author
+    return {'message': author}
+
+@app.delete('/author-delete/')
+async def delete_author(author_id: int):
+    posts.pop(author_id)
+    return {'message': 'Author deleted successfully'}
