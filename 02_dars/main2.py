@@ -46,6 +46,12 @@ async def update_post(post_id: int, post: Post):
     posts[post_id] = post
     return {'message': post}
 
+@app.patch('/post-update/{post_id}')
+async def update_post(post_id: int, post: Post):
+    posts[post_id] = post
+    return {'message': post}
+
+
 @app.delete('/post-delete/')
 async def delete_post(post_id: int):
     posts.pop(post_id)
@@ -61,6 +67,16 @@ async def create_category(category: Category):
     category.name = category.name
     return {'message': category}
 
+@app.put('category-update/')
+async def update_category(category: Category):
+    category.name = category.name
+    return {'message': category}
+
+@app.delete('/category-delete/')
+async def delete_category(category: Category):
+    posts.pop(category.id)
+    return {'message': 'Category deleted successfully'}
+
 @app.post('/tag-create/')
 async def create_tag(tag: Tag):
     posts.append(tag)
@@ -70,6 +86,16 @@ async def create_tag(tag: Tag):
 @app.get('/tags/')
 async def retrieve_tags():
     return {'tags': posts}
+
+@app.put('/tag-update/')
+async def update_tag(tag_id: int, tag: Tag):
+    posts[tag_id] = tag
+    return {'message': tag}
+
+@app.delete('/tag-delete/')
+async def delete_tag(tag_id: int):
+    posts.pop(tag_id)
+    return {'message': 'Tag deleted successfully'}
 
 @app.get('/categories/')
 async def retrieve_categories():
