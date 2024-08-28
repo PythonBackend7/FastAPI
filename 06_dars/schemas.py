@@ -46,7 +46,8 @@ class AboutBase(BaseModel):
 
 
 class AboutCreate(AboutBase):
-    pass
+    experience_id: int
+    education_id: int
 
 
 class About(AboutBase):
